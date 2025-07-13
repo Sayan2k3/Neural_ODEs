@@ -28,79 +28,51 @@ Stiff ODE systems from combustion chemistry are notoriously difficult and expens
 ├── models/                        # Trained model weights (.pt)
 ├── plots/                         # Result visualizations and training loss
 └── README.md                      # This file
-🛠️ Technologies Used
-Python, NumPy, Matplotlib
+## 🛠️ Technologies Used
 
-PyTorch for model definition and training
+- **Python**, **NumPy**, **Matplotlib**
+- **PyTorch** – for model definition and training
+- **Torchdiffeq** – for continuous-time Neural ODE integration
+- **Cantera** – for hydrogen-air autoignition simulation and data generation
+- **Kernel Density Estimation (KDE)** – for multi-scale temporal sampling
 
-Torchdiffeq for Neural ODE integration
+---
 
-Cantera for data generation (autoignition modeling)
+## 📊 Dataset
 
-Kernel Density Estimation (KDE) for multi-scale sampling
+- **36 hydrogen ignition cases** simulated using Cantera
+- **Simulation time**: 10 ms with **1e-6 s timestep** (10,000 points per case)
+- **State variables**: 10 total (9 species mass fractions + 1 temperature)
+- Dataset **reduced using KDE-based sampling** to 50 key points per case
 
-📊 Dataset
-36 hydrogen ignition cases
+---
 
-Simulated for 10 ms with timestep = 1e-6 s (10,000 steps per case)
+## 🧠 Model Architecture
 
-10 state variables: 9 species mass fractions + temperature
+- **Encoder**: `10 → 128 → 64 → 5` with **ELU activations**
+- **Latent ODE Function**: `5 → 64 → 64 → 5` (latent dynamics)
+- **Decoder**: `5 → 64 → 128 → 10` for full-state reconstruction
+- **ODE Solver**: `dopri5` with `atol=1e-8`, `rtol=1e-7`
+- **Loss Function**: Mean Absolute Error (L1 Loss)
+- **Training**: 
+  - Epochs: `1000`
+  - Learning Rate: `1e-4` with scheduler
+  - Batch Size: `1`
+  - Gradient Clipping applied
 
-Reduced using KDE-based multi-scale sampling (50 points per case)
+---
 
-🧠 Model Architecture
-Encoder: 10 → 128 → 64 → 5 (ELU activations)
+## 📈 Results
 
-Neural ODE Function: 5 → 64 → 64 → 5 (latent dynamics)
+- The **AE-NODE model accurately reproduces ignition delays and species evolution**
+- **KDE-based multi-scale sampling** improves model convergence and learning efficiency
+- **Stiffness of the original system is mitigated**, enabling faster and stable inference using explicit solvers
 
-Decoder: 5 → 64 → 128 → 10 (reconstruction)
+---
 
-ODE Solver: dopri5 with atol=1e-8, rtol=1e-7
+## ✅ How to Run
 
-Loss Function: L1 Loss
-
-Learning Rate: 1e-4 with scheduler
-
-Epochs: 1000
-
-📈 Results
-AE-NODE model accurately captures ignition delay and post-ignition dynamics
-
-KDE sampling improves learning efficiency
-
-Reduced stiffness allows use of explicit solvers
-
-✅ How to Run
-Clone the repository:
-
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/h2-autoignition-node.git
-cd h2-autoignition-node
-Set up environment:
-
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Run sampling:
-
-bash
-Copy
-Edit
-jupyter notebook data_sampling_sb.ipynb
-Train AE-NODE model:
-
-bash
-Copy
-Edit
-jupyter notebook h2_node_training_sp.ipynb
-🔮 Future Work
-Implement dual-phase sampling (pre- and post-ignition equally)
-
-Integrate stiffness-aware loss functions or solvers
-
-Extend to multi-dimensional and multi-fuel systems
-
-Compare with other dimensionality reduction methods (PCA, VAEs)
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/h2-autoignition-node.git
+   cd h2-autoignition-node
