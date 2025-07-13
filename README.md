@@ -5,7 +5,6 @@ This repository implements an **Autoencoder-Neural ODE (AE-NODE)** framework to 
 ---
 ## 📁 Project Structure
 
-
 .
 ├── data_sampling_sb.ipynb         # KDE + random sampling of Cantera output
 ├── h2_node_training_sp.ipynb      # AE-NODE training and validation
