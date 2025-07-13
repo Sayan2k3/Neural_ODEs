@@ -6,22 +6,16 @@ This repository presents a deep learning-based framework that models stiff hydro
 
 ---
 
-## 📁 Project Structure
-
+📁 Project Structure
 .
-├── data_sampling_sb.ipynb # KDE + random sampling of Cantera output
-├── h2_node_training_sp.ipynb # AE-NODE training and validation
-├── solution_data/ # Raw ignition simulation data (CSV)
-├── sampled_multiscale_50/ # KDE-sampled reduced dataset
-├── models/ # Trained model weights (.pt)
-├── plots/ # Result visualizations and training loss
-└── README.md # This file
+├── data_sampling_sb.ipynb         # KDE + random sampling of Cantera output
+├── h2_node_training_sp.ipynb      # AE-NODE training and validation
+├── solution_data/                 # Raw ignition simulation data (CSV)
+├── sampled_multiscale_50/         # KDE-sampled reduced dataset
+├── models/                        # Trained model weights (.pt)
+├── plots/                         # Result visualizations and training loss
+└── README.md                      # Project overview and usage guide
 
-yaml
-Copy
-Edit
-
----
 
 ## 🚀 Getting Started
 
