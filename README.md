@@ -3,16 +3,7 @@
 This repository implements an **Autoencoder-Neural ODE (AE-NODE)** framework to efficiently model the stiff chemical dynamics of constant-pressure hydrogen-air autoignition systems. Leveraging **Cantera** for data generation and **PyTorch** for training, the model captures complex temporal evolution with significantly reduced computational overhead.
 
 ---
-## 📁 Project Structure
 
-.
-├── data_sampling_sb.ipynb         # KDE + random sampling of Cantera output
-├── h2_node_training_sp.ipynb      # AE-NODE training and validation
-├── solution_data/                 # Raw ignition simulation data (CSV)
-├── sampled_multiscale_50/         # KDE-sampled reduced dataset
-├── models/                        # Trained model weights (.pt)
-├── plots/                         # Result visualizations and training loss
-└── README.md                      # This file
 
 ## 🚀 Project Overview
 
@@ -81,4 +72,15 @@ Stiff ODE systems from combustion chemistry are notoriously difficult and expens
    git clone https://github.com/yourusername/h2-autoignition-node.git
    cd h2-autoignition-node
 
+## 📁 Project Structure
+
+```bash
+.
+├── data_sampling_sb.ipynb         # KDE + random sampling of Cantera output
+├── h2_node_training_sp.ipynb      # AE-NODE training and validation
+├── solution_data/                 # Raw ignition simulation data (CSV)
+├── sampled_multiscale_50/         # KDE-sampled reduced dataset
+├── models/                        # Trained model weights (.pt)
+├── plots/                         # Result visualizations and training loss
+└── README.md                      # This file
 
